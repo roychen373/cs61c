@@ -26,25 +26,41 @@ dot:
     blt a4, t0, exit_stride
 
 loop_start:
-    addi t1, x0, 0 # rep arr1 index
-    addi t2, x0, 0 # rep arr2 index
+    addi t0, x0, 0 # rep arr1 index
+    addi t1, x0, 0 # rep arr2 index
     addi sp, sp, -4
     sw ra, 0(sp)
 
+    addi t2, x0, 0 # rep the elements used compared to a2
     addi t3, x0, 0 # rep ans
-    addi t4, x0, 0 # rep arr1 len to add
-    addi t5, x0, 0 # rep arr2 len to add
 
 loop_continue:
-    bge t1, a2, loop_end
     bge t2, a2, loop_end
+    
+    mul t0, a3, t2 # striding
+    mul t1, a4, t2
+    slli t0, t0, 2
+    slli t1, t1, 2
 
-    slli t4, 
+    add t0, t0, a0
+    add t1, t1, a1
+    lw t0, 0(t0)
+    lw t1, 0(t1)
+    
+    mul t0, t0, t1
+    add t3, t3, t0
+
+    addi t2, t2, 1
+
+    j loop_continue
 
 loop_end:
     lw ra, 0(sp)
     addi sp, sp, 4
     
+    add a0, x0, t3
+    
+    ret
 
 exit_element:
     li a1, 57
@@ -53,20 +69,3 @@ exit_element:
 exit_stride:
     li a1, 58
     call exit2
-
-
-
-
-
-
-
-
-
-
-loop_end:
-
-
-    # Epilogue
-
-
-    ret
