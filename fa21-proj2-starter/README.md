@@ -32,3 +32,4 @@
 
 ## Here's what I did in project 2:
 # cs61c
+I give up parts of the completion cuz the coding issues.
