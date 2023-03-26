@@ -40,7 +40,7 @@ loop_continue:
     addi t2, t2, 1
     bge t2, a1, loop_end        #bge >= && bgt >
     # t3 rep the ptr, t4 rep the cur num, t6 rep the lens a0 needed to add
-    slli t6, t2, 2
+    slli t6, t2, 1
     add t3, t6, a0
     lw t4, 0(t3)
 
